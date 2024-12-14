@@ -1,6 +1,6 @@
 'use client';
 import { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, useParams } from 'next/navigation';
 import { FiCopy, FiMail } from 'react-icons/fi';
 
 interface Contact {
@@ -18,8 +18,9 @@ interface OutreachResponse {
   }
 }
 
-export default function ApplyPage({ params }: { params: { jobId: string } }) {
+export default function ApplyPage() {
   const router = useRouter();
+  const params = useParams();
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string>('');
   const [copySuccess, setCopySuccess] = useState(false);
@@ -36,7 +37,10 @@ export default function ApplyPage({ params }: { params: { jobId: string } }) {
       }
 
       try {
-        const decodedCompanyName = decodeURIComponent(params.jobId);
+        const jobId = params?.jobId as string;
+        if (!jobId) return;
+        
+        const decodedCompanyName = decodeURIComponent(jobId);
         
         const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/api/outreach`, {
           method: 'POST',
@@ -73,10 +77,8 @@ export default function ApplyPage({ params }: { params: { jobId: string } }) {
       }
     };
 
-    if (params.jobId) {
-      fetchOutreachPackage();
-    }
-  }, [params.jobId, router]);
+    fetchOutreachPackage();
+  }, [params, router]);
 
   const handleCopy = async () => {
     try {
