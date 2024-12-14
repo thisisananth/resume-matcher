@@ -64,7 +64,7 @@ export default function PreferencesPage() {
   ) => {
     setPreferences(prev => ({
       ...prev,
-      [category]: prev[category].includes(item as any)
+      [category]: prev[category].includes(item)
         ? prev[category].filter(i => i !== item)
         : [...prev[category], item]
     }));
