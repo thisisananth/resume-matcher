@@ -58,13 +58,13 @@ export default function PreferencesPage() {
     { value: 'public', label: 'Public' },
   ];
 
-  const toggleSelection = <T extends keyof Preferences>(
-    category: T,
-    item: Preferences[T][number]
+  const toggleSelection = (
+    category: keyof Preferences,
+    item: string | Location | CompanyStage
   ) => {
     setPreferences(prev => ({
       ...prev,
-      [category]: prev[category].includes(item)
+      [category]: prev[category].includes(item as any)
         ? prev[category].filter(i => i !== item)
         : [...prev[category], item]
     }));
