@@ -1,6 +1,5 @@
 'use client';
 import { useState, useEffect } from 'react';
-import { FiCheck } from 'react-icons/fi';
 import { useRouter } from 'next/navigation';
 
 interface PreferencesResponse {

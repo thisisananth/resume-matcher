@@ -17,7 +17,7 @@ export default function UploadPage() {
   const [uploadStatus, setUploadStatus] = useState<'idle' | 'uploading' | 'success' | 'error'>('idle');
   const [errorMessage, setErrorMessage] = useState<string>('');
 
-  const handleUpload = async (uploadFile: File) => {
+  const handleUpload = useCallback(async (uploadFile: File) => {
     setUploadStatus('uploading');
     try {
       // Check for internet connection
@@ -59,7 +59,7 @@ export default function UploadPage() {
       setErrorMessage(error instanceof Error ? error.message : 'Upload failed. Please try again.');
       setUploadStatus('error');
     }
-  };
+  }, [router]);
 
   const onDrop = useCallback((acceptedFiles: File[]) => {
     if (acceptedFiles?.length > 0) {
@@ -111,7 +111,7 @@ export default function UploadPage() {
         Stand Out with Personalized Outreach
       </h2>
       <p className="text-gray-600 mb-6">
-        We'll analyze your experience and generate tailored cover letters to help you connect directly with startup decision-makers. No more applying into the void - make meaningful connections that get noticed.
+        We&apos;ll analyze your experience and generate tailored cover letters to help you connect directly with startup decision-makers. No more applying into the void - make meaningful connections that get noticed.
       </p>
 
       <div

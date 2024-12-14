@@ -28,7 +28,15 @@ export const resumeService = {
     try {
       const formData = new FormData();
       formData.append('resume', file);
-      // ... rest of the code
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/uploadResume`, {
+        method: 'POST',
+        body: formData,
+      });
+      const data = await response.json();
+      return { data };
+    } catch (error) {
+      console.error('Upload failed:', error);
+      throw error;
     }
   },
 
