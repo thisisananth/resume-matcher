@@ -16,6 +16,13 @@ interface PreferencesResponse {
 type CompanyStage = 'seed' | 'seriesA' | 'seriesB' | 'seriesC' | 'public';
 type Location = 'remote' | 'hybrid' | 'onsite';
 
+type Preferences = {
+  roles: string[];
+  industries: string[];
+  locations: Location[];
+  companyStages: CompanyStage[];
+};
+
 export default function PreferencesPage() {
   const router = useRouter();
   const [submitError, setSubmitError] = useState<string>('');
@@ -29,11 +36,11 @@ export default function PreferencesPage() {
     }
   }, [router]);
 
-  const [preferences, setPreferences] = useState({
-    roles: [] as string[],
-    industries: [] as string[],
-    locations: [] as Location[],
-    companyStages: [] as CompanyStage[],
+  const [preferences, setPreferences] = useState<Preferences>({
+    roles: [],
+    industries: [],
+    locations: [],
+    companyStages: [],
   });
 
   const roles = ['Software Engineer', 'Product Manager', 'Data Scientist', 'Designer', 'Marketing', 'Sales', 'Operations'];
@@ -51,7 +58,10 @@ export default function PreferencesPage() {
     { value: 'public', label: 'Public' },
   ];
 
-  const toggleSelection = <T extends keyof typeof preferences>(category: T, item: typeof preferences[T][number]) => {
+  const toggleSelection = <T extends keyof Preferences>(
+    category: T,
+    item: Preferences[T][number]
+  ) => {
     setPreferences(prev => ({
       ...prev,
       [category]: prev[category].includes(item)
