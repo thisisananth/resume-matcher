@@ -13,14 +13,11 @@ interface PreferencesResponse {
   }
 }
 
-type CompanyStage = 'seed' | 'seriesA' | 'seriesB' | 'seriesC' | 'public';
-type Location = 'remote' | 'hybrid' | 'onsite';
-
 type Preferences = {
   roles: string[];
   industries: string[];
-  locations: Location[];
-  companyStages: CompanyStage[];
+  locations: string[];
+  companyStages: string[];
 };
 
 export default function PreferencesPage() {
@@ -45,22 +42,22 @@ export default function PreferencesPage() {
 
   const roles = ['Software Engineer', 'Product Manager', 'Data Scientist', 'Designer', 'Marketing', 'Sales', 'Operations'];
   const industries = ['Fintech', 'Healthcare', 'E-commerce', 'AI/ML', 'Enterprise', 'Consumer', 'Education'];
-  const locations: { value: Location; label: string }[] = [
-    { value: 'remote', label: 'Remote' },
-    { value: 'hybrid', label: 'Hybrid' },
-    { value: 'onsite', label: 'On-site' },
+  const locations = [
+    'remote',
+    'hybrid',
+    'onsite'
   ];
-  const companyStages: { value: CompanyStage; label: string }[] = [
-    { value: 'seed', label: 'Seed' },
-    { value: 'seriesA', label: 'Series A' },
-    { value: 'seriesB', label: 'Series B' },
-    { value: 'seriesC', label: 'Series C+' },
-    { value: 'public', label: 'Public' },
+  const companyStages = [
+    'seed',
+    'seriesA',
+    'seriesB',
+    'seriesC',
+    'public'
   ];
 
   const toggleSelection = (
     category: keyof Preferences,
-    item: string | Location | CompanyStage
+    item: string
   ) => {
     setPreferences(prev => ({
       ...prev,
@@ -165,16 +162,16 @@ export default function PreferencesPage() {
         <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
           <h2 className="text-2xl font-semibold mb-4 text-gray-800">Work Location</h2>
           <div className="flex flex-wrap gap-3">
-            {locations.map(({ value, label }) => (
+            {locations.map(location => (
               <button
-                key={value}
-                onClick={() => toggleSelection('locations', value)}
+                key={location}
+                onClick={() => toggleSelection('locations', location)}
                 className={`px-4 py-2 rounded-full text-sm font-medium transition-colors
-                  ${preferences.locations.includes(value)
+                  ${preferences.locations.includes(location)
                     ? 'bg-blue-100 text-blue-700'
                     : 'bg-gray-100 text-gray-700 hover:bg-gray-200'}`}
               >
-                {label}
+                {location.charAt(0).toUpperCase() + location.slice(1)}
               </button>
             ))}
           </div>
@@ -183,16 +180,19 @@ export default function PreferencesPage() {
         <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
           <h2 className="text-2xl font-semibold mb-4 text-gray-800">Company Stage</h2>
           <div className="flex flex-wrap gap-3">
-            {companyStages.map(({ value, label }) => (
+            {companyStages.map(stage => (
               <button
-                key={value}
-                onClick={() => toggleSelection('companyStages', value)}
+                key={stage}
+                onClick={() => toggleSelection('companyStages', stage)}
                 className={`px-4 py-2 rounded-full text-sm font-medium transition-colors
-                  ${preferences.companyStages.includes(value)
+                  ${preferences.companyStages.includes(stage)
                     ? 'bg-blue-100 text-blue-700'
                     : 'bg-gray-100 text-gray-700 hover:bg-gray-200'}`}
               >
-                {label}
+                {stage === 'seriesA' ? 'Series A' :
+                 stage === 'seriesB' ? 'Series B' :
+                 stage === 'seriesC' ? 'Series C+' :
+                 stage.charAt(0).toUpperCase() + stage.slice(1)}
               </button>
             ))}
           </div>
