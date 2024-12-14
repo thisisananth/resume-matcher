@@ -168,7 +168,7 @@ export default function UploadPage() {
 
       {uploadStatus === 'success' && (
         <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
-          <h3 className="text-xl font-semibold mb-3 text-gray-800">What's Next?</h3>
+          <h3 className="text-xl font-semibold mb-3 text-gray-800">What&apos;s Next?</h3>
           <div className="space-y-4 text-gray-600">
             <p>Our AI is analyzing your resume to:</p>
             <ul className="list-disc list-inside space-y-2 ml-4">
