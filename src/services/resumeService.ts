@@ -25,13 +25,11 @@ export interface MatchResult {
 export const resumeService = {
   // Stub for resume upload
   async uploadResume(file: File): Promise<ApiResponse<ResumeUploadResponse>> {
-    // In development, return mock data
-    return {
-      data: {
-        id: '123',
-        status: 'success',
-      },
-    };
+    try {
+      const formData = new FormData();
+      formData.append('resume', file);
+      // ... rest of the code
+    }
   },
 
   // Stub for preferences submission

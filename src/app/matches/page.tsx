@@ -100,7 +100,7 @@ export default function MatchesPage() {
           Your Top Startup Matches
         </h1>
         <p className="text-xl text-gray-600">
-          We've found {matches.length} matches based on your profile and preferences
+          We&apos;ve found {matches.length} matches based on your profile and preferences
         </p>
       </div>
 

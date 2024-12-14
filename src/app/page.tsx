@@ -1,7 +1,7 @@
 'use client';
 import { useCallback, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
-import { FiUploadCloud, FiFile, FiCheck } from 'react-icons/fi';
+import { FiUploadCloud, FiCheck } from 'react-icons/fi';
 import { useRouter } from 'next/navigation';
 
 interface UploadResponse {
@@ -66,7 +66,7 @@ export default function UploadPage() {
       setFile(acceptedFiles[0]);
       handleUpload(acceptedFiles[0]);
     }
-  }, []);
+  }, [handleUpload]);
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
@@ -177,7 +177,7 @@ export default function UploadPage() {
               <li>Suggest roles that align with your career goals</li>
             </ul>
             <p className="text-sm text-gray-500 mt-4">
-              You'll be redirected to customize your preferences and view your matches shortly.
+              You&apos;ll be redirected to customize your preferences and view your matches shortly.
             </p>
           </div>
         </div>

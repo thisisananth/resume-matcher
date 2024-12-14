@@ -14,8 +14,9 @@ export const apiClient = {
       const response = await fetch(`${API_BASE_URL}${endpoint}`);
       const data = await response.json();
       return { data };
-    } catch (error) {
-      return { data: {} as T, error: 'An error occurred' };
+    } catch (err) {
+      console.error('API error:', err);
+      throw err;
     }
   },
 
@@ -30,8 +31,9 @@ export const apiClient = {
       });
       const data = await response.json();
       return { data };
-    } catch (error) {
-      return { data: {} as T, error: 'An error occurred' };
+    } catch (err) {
+      console.error('API error:', err);
+      throw err;
     }
   },
 }; 

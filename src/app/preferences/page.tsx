@@ -93,6 +93,7 @@ export default function PreferencesPage() {
       }
 
       const data: PreferencesResponse = await response.json();
+      localStorage.setItem('preferences', JSON.stringify(data.preferences));
       
       // Navigate to matches page after successful submission
       router.push('/matches');
